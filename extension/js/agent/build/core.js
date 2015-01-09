@@ -25,7 +25,7 @@ var $ = this.$;
 var Backbone = this.Backbone;
 var Marionette = this.Marionette;
 
-
+var Agent = this;
 
  /*
   * LIBRARIES
@@ -109,8 +109,6 @@ var Marionette = this.Marionette;
 // @include ../patches/patchBackbone.js
 // @include ../patches/patchBackboneComponent.js
 // @include ../patches/patchAppComponentTrigger.js
-// @include ../patches/patchAppComponentEvents.js
-// @include ../patches/patchAppComponentSync.js
 // @include ../patches/patchBackboneView.js
 // @include ../patches/patchBackboneModel.js
 // @include ../patches/patchBackboneCollection.js

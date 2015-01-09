@@ -1,30 +1,33 @@
 // debugger;
 
+;(function(Agent){
 
-debug.log("Backbone agent is starting...");
-console.log('Marionette Inspector: window.__agent = ', this);
-this.sendAppComponentReport('start');
+  debug.log("Backbone agent is starting...");
+  console.log('Marionette Inspector: window.__agent = ', this);
+  Agent.sendAppComponentReport('start');
 
-this.patchDefine(
-  _.bind(this.patchBackbone, this),
-  _.bind(this.patchMarionette, this)
-);
+  Agent.patchDefine(
+    Agent.patchBackbone,
+    Agent.patchMarionette
+  );
 
-patchWindow(
-  _.bind(this.patchBackbone, this),
-  _.bind(this.patchMarionette, this)
-);
+  Agent.patchWindow(
+    Agent.patchBackbone,
+    Agent.patchMarionette
+  );
 
-/* start is a manual way to start the agent if
- * Backbone and Marionette are not set on the window or
- * you're not using `define` to package your modules.
- */
-this.start = function(Backbone, Marionette) {
-  this.patchBackbone(Backbone);
-  this.patchMarionette(Backbone, Marionette);
-};
+  /* start is a manual way to start the agent if
+   * Backbone and Marionette are not set on the window or
+   * you're not using `define` to package your modules.
+   */
+  Agent.start = function(Backbone, Marionette) {
+    Agent.patchBackbone(Backbone);
+    Agent.patchMarionette(Backbone, Marionette);
+  };
 
-this.lazyWorker = new this.LazyWorker();
+  Agent.lazyWorker = new Agent.LazyWorker();
+
+}(Agent));
 
 window.setTimeout(function() {
   if(window.__agent && window.__agent.patchedBackbone) {
